@@ -1,0 +1,211 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title mb-0">
+            <i class="fas fa-edit"></i> Edit Booking #{{ booking.id }}
+          </h3>
+        </div>
+        <div class="card-body">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          
+          <form action="{{ url_for('booking.update_booking', booking_id=booking.id) }}" method="POST">
+            <div class="row">
+              <!-- Event Details -->
+              <div class="col-md-6">
+                <h5 class="mb-3">Event Details</h5>
+                
+                <div class="form-group">
+                  <label for="event_date">Event Date *</label>
+                  <input type="date" class="form-control" id="event_date" name="event_date" 
+                         value="{{ booking.event_date.strftime('%Y-%m-%d') }}" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="start_at">Start Time *</label>
+                  <input type="time" class="form-control" id="start_at" name="start_at" 
+                         value="{{ booking.start_at }}" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="max_total_hour">Duration (Hours) *</label>
+                  <input type="number" class="form-control" id="max_total_hour" name="max_total_hour" 
+                         value="{{ booking.max_total_hour }}" min="1" max="24" required>
+                </div>
+                
+                <div class="form-group">
+                  <label for="no_of_guest">Number of Guests *</label>
+                  <input type="number" class="form-control" id="no_of_guest" name="no_of_guest" 
+                         value="{{ booking.no_of_guest }}" min="1" required>
+                </div>
+                
+                 <div class="form-group">
+                  <label for="amount">Total Amount (₹) *</label>
+                  <input type="number" class="form-control" id="amount" name="amount" 
+                         value="{{ booking.amount }}" min="0" step="0.01" required>
+                </div>
+              </div>
+              
+              <!-- Services -->
+              <div class="col-md-6">
+                <h5 class="mb-3">Services & Venue</h5>
+                
+                <div class="form-group">
+                  <label for="event_id">Event Type</label>
+                  <select class="form-control" id="event_id" name="event_id">
+                    <option value="">Select Event Type</option>
+                    {% for event in events %}
+                      <option value="{{ event.id }}" 
+                              {% if booking.event_id == event.id %}selected{% endif %}>
+                        {{ event.eventname }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="hotel_id">Hotel/Venue</label>
+                  <select class="form-control" id="hotel_id" name="hotel_id">
+                    <option value="">Select Hotel/Venue</option>
+                    {% for hotel in hotels %}
+                      <option value="{{ hotel.id }}" 
+                              data-price="{{ hotel.price }}"
+                              {% if booking.hotel_id == hotel.id %}selected{% endif %}>
+                         {{ hotel.hotel_name }} - ₹{{ hotel.price }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="catering_id">Catering Service</label>
+                  <select class="form-control" id="catering_id" name="catering_id">
+                    <option value="">Select Catering Service</option>
+                    {% for catering in catering_services %}
+                      <option value="{{ catering.id }}" 
+                              data-price="{{ catering.cater_price }}"
+                              {% if booking.catering_id == catering.id %}selected{% endif %}>
+                         {{ catering.catername }} - ₹{{ catering.cater_price }}
+                      </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <!-- Additional Services -->
+            <div class="row">
+              <div class="col-md-12">
+                <h5 class="mb-3">Additional Services (Optional)</h5>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="photographer_name_desc">Photographer</label>
+                      <textarea class="form-control" id="photographer_name_desc" name="photographer_name_desc" 
+                                rows="2" placeholder="Photographer details and requirements">{{ booking.photographer_name_desc or '' }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="dj_name_desc">DJ/Entertainment</label>
+                      <textarea class="form-control" id="dj_name_desc" name="dj_name_desc" 
+                                rows="2" placeholder="DJ/Entertainment details and requirements">{{ booking.dj_name_desc or '' }}</textarea>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="makeupartist_name_desc">Makeup Artist</label>
+                      <textarea class="form-control" id="makeupartist_name_desc" name="makeupartist_name_desc" 
+                                rows="2" placeholder="Makeup artist details and requirements">{{ booking.makeupartist_name_desc or '' }}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="decorator_name_desc">Decorator</label>
+                      <textarea class="form-control" id="decorator_name_desc" name="decorator_name_desc" 
+                                rows="2" placeholder="Decoration details and requirements">{{ booking.decorator_name_desc or '' }}</textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <hr>
+            
+            <!-- Submit Buttons -->
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-save"></i> Update Booking
+                </button>
+                <a href="{{ url_for('booking.view_booking_detail', booking_id=booking.id) }}" 
+                   class="btn btn-secondary btn-lg ml-2">
+                  <i class="fas fa-times"></i> Cancel
+                </a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Auto-calculate total amount when services are selected
+document.addEventListener('DOMContentLoaded', function() {
+  const hotelSelect = document.getElementById('hotel_id');
+  const cateringSelect = document.getElementById('catering_id');
+  const amountInput = document.getElementById('amount');
+  
+  function calculateTotal() {
+    let total = 0;
+    
+    // Add hotel price
+    if (hotelSelect.value) {
+      const selectedOption = hotelSelect.options[hotelSelect.selectedIndex];
+      const price = parseFloat(selectedOption.dataset.price) || 0;
+      total += price;
+    }
+    
+    // Add catering price
+    if (cateringSelect.value) {
+      const selectedOption = cateringSelect.options[cateringSelect.selectedIndex];
+      const price = parseFloat(selectedOption.dataset.price) || 0;
+      total += price;
+    }
+    
+    // Set minimum amount if no services selected
+    if (total === 0) {
+      total = 100; // Minimum booking amount
+    }
+    
+    amountInput.value = total;
+  }
+  
+  hotelSelect.addEventListener('change', calculateTotal);
+  cateringSelect.addEventListener('change', calculateTotal);
+  
+  // Set minimum date to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('event_date').min = today;
+});
+</script>
+
+{% include 'footer.html' %} 

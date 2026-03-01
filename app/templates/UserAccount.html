@@ -1,0 +1,15 @@
+{% include 'header.html' %}
+<div class="container mt-5">
+  <h2>User Account</h2>
+  <ul class="list-group">
+    <li class="list-group-item">First Name: {{ session.get('user_firstname') }}</li>
+    <li class="list-group-item">Last Name: {{ session.get('user_lastname') }}</li>
+    <li class="list-group-item">Email: {{ session.get('user_email') }}</li>
+    <li class="list-group-item">Phone: {{ session.get('user_phone') }}</li>
+    <li class="list-group-item">Address: {{ session.get('user_address') }}</li>
+    <li class="list-group-item">Gender: {{ session.get('user_gender') }}</li>
+    <li class="list-group-item">Role: {{ session.get('user_role') }}</li>
+  </ul>
+  <a href="{{ url_for('user.user_logout') }}" class="btn btn-danger mt-3">Logout</a>
+</div>
+{% include 'footer.html' %}

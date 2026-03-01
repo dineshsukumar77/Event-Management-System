@@ -1,0 +1,21 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Welcome, Admin!</h2>
+  <p class="lead">This is your dashboard. Use the navigation to manage hotels, bookings, and more.</p>
+  <a href="{{ url_for('vendor.list_vendors') }}" class="btn btn-warning ml-2">Manage Vendors</a>
+  <a href="{{ url_for('hotel.list_hotels') }}" class="btn btn-primary ml-2">Manage Venues</a>
+  <a href="{{ url_for('user.list_users') }}" class="btn btn-info ml-2">View All Users</a>
+  <a href="{{ url_for('catering.list_catering') }}" class="btn btn-success ml-2">Manage Buffet</a>
+
+  <hr />
+  <form method="post" action="{{ url_for('main.admin_export_json') }}" style="display:inline-block;">
+    <button type="submit" class="btn btn-outline-secondary">Export JSON (data/)</button>
+  </form>
+  <form method="post" action="{{ url_for('main.admin_import_json') }}" style="display:inline-block; margin-left: 8px;">
+    <button type="submit" class="btn btn-outline-dark">Import JSON -> Mongo</button>
+  </form>
+
+</div>
+{% endblock %}
+{% include 'footer.html' %}

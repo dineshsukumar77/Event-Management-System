@@ -1,0 +1,245 @@
+{% include 'header.html' %}
+{% include 'homeNav.html' %}
+
+<style>
+  .carousel-item {
+    height: 100vh;
+    min-height: 300px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  /* 2025 Design Trends */
+  .hero-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+  }
+  
+  .modern-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .modern-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+</style>
+
+<header style="margin-top: -40px;">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active" style="background-image: url('{{ url_for('static', filename='images/hotels/1.jpeg') }}')">
+        <div class="carousel-caption d-none d-md-block glass-morphism p-4">
+          <h1 class="display-4 font-weight-bold">ADGH</h1>
+          <p class="lead text-white">The Perfect Event Planner for 2025</p>
+          <a href="#services" class="btn btn-light btn-lg">Explore Services</a>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('{{ url_for('static', filename='images/hotels/2.jpeg') }}')">
+        <div class="carousel-caption d-none d-md-block glass-morphism p-4">
+          <h2 class="display-5">Venues</h2>
+          <p class="text-white">Premium locations for your special moments</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('{{ url_for('static', filename='images/hotels/3.jpeg') }}')">
+        <div class="carousel-caption d-none d-md-block glass-morphism p-4">
+          <h2 class="display-5">Elegant Reception</h2>
+          <p class="text-white">Create unforgettable memories</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('{{ url_for('static', filename='images/Catering.png') }}')">
+        <div class="carousel-caption d-none d-md-block glass-morphism p-4">
+          <h2 class="display-5">buffet</h2>
+          <p class="text-white">Exquisite dining experiences</p>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('{{ url_for('static', filename='images/Wedding.png') }}')">
+        <div class="carousel-caption d-none d-md-block glass-morphism p-4">
+          <h2 class="display-5">Premium Services</h2>
+          <p class="text-white">Every detail matters</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</header>
+
+<section id="services" class="py-5 hero-gradient">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-4 text-white mb-3">Our Services</h2>
+      <p class="lead text-white-50">Discover our comprehensive event management solutions</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="modern-card p-4 text-center h-100 floating-animation">
+          <div class="mb-4">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                 alt="Venues" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+          </div>
+          <h3 class="gradient-text">Premium Venues</h3>
+          <p class="text-muted">Luxurious halls and venues for your special occasions. From intimate gatherings to grand celebrations.</p>
+          <a href="{{ url_for('hotel.list_hotels') }}" class="btn btn-outline-primary">Explore Venues</a>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="modern-card p-4 text-center h-100 floating-animation" style="animation-delay: 0.5s;">
+          <div class="mb-4">
+            <img src="https://images.unsplash.com/photo-1555244162-cc228a0a0b16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                 alt="buffet" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+          </div>
+          <h3 class="gradient-text">buffet</h3>
+          <p class="text-muted">Exquisite dining experiences with world-class chefs. Custom menus for every occasion.</p>
+          <a href="{{ url_for('catering.list_catering') }}" class="btn btn-outline-primary">View Menus</a>
+        </div>
+      </div>
+      <div class="col-lg-4 mb-4">
+        <div class="modern-card p-4 text-center h-100 floating-animation" style="animation-delay: 1s;">
+          <div class="mb-4">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                 alt="Professional Vendors" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+          </div>
+          <h3 class="gradient-text">Expert Vendors</h3>
+          <p class="text-muted">Curated network of professional vendors. Photography, music, decoration, and more.</p>
+          <a href="{{ url_for('vendor.list_vendors') }}" class="btn btn-outline-primary">Meet Vendors</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <h2 class="display-5 gradient-text mb-4">Venues</h2>
+        <p class="lead text-muted">Experience the epitome of elegance with our carefully curated selection of premium venues. Each location is chosen for its unique character, exceptional service, and ability to create unforgettable moments.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Exclusive locations</li>
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Professional staff</li>
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Flexible capacity</li>
+        </ul>
+        <a href="{{ url_for('hotel.list_hotels') }}" class="btn btn-primary btn-lg">View Venues</a>
+      </div>
+      <div class="col-md-6">
+        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+             alt="Venues" class="img-fluid rounded-lg shadow-lg">
+      </div>
+    </div>
+    
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6 order-md-2">
+        <h2 class="display-5 gradient-text mb-4">buffet</h2>
+        <p class="lead text-muted">Indulge in culinary excellence with our buffet services. From intimate dinners to grand feasts, our expert chefs create memorable dining experiences that delight every palate.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Custom menus</li>
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Dietary accommodations</li>
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Professional service</li>
+        </ul>
+        <a href="{{ url_for('catering.list_catering') }}" class="btn btn-primary btn-lg">Explore Menus</a>
+      </div>
+      <div class="col-md-6 order-md-1">
+        <img src="https://images.unsplash.com/photo-1555244162-cc228a0a0b16?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+             alt="buffet" class="img-fluid rounded-lg shadow-lg">
+      </div>
+    </div>
+    
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <h2 class="display-5 gradient-text mb-4">Expert Vendors</h2>
+        <p class="lead text-muted">Connect with our network of professional vendors who specialize in creating extraordinary events. From photographers to decorators, we ensure every detail is perfect.</p>
+        <ul class="list-unstyled">
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Vetted professionals</li>
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Quality guaranteed</li>
+          <li class="mb-2"><i class="fas fa-check text-success mr-2"></i>Comprehensive services</li>
+        </ul>
+        <a href="{{ url_for('vendor.list_vendors') }}" class="btn btn-primary btn-lg">Meet Our Vendors</a>
+      </div>
+      <div class="col-md-6">
+        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+             alt="Professional Vendors" class="img-fluid rounded-lg shadow-lg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-5 hero-gradient">
+  <div class="container text-center">
+    <h2 class="display-4 text-white mb-4">Ready to Create Your Dream Event?</h2>
+    <p class="lead text-white-50 mb-5">Let us help you bring your vision to life with our comprehensive event management services.</p>
+    <div class="row justify-content-center">
+      <div class="col-md-4 mb-3">
+        <a href="{{ url_for('user.user_login_page') }}" class="btn btn-light btn-lg btn-block">Get Started</a>
+      </div>
+      <div class="col-md-4 mb-3">
+        <a href="#" class="btn btn-outline-light btn-lg btn-block">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="footer-section">
+  <footer class="footer bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="mb-3">ADGH</h5>
+          <p class="text-muted">Creating unforgettable moments since 2025. Your trusted partner in event management.</p>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <h6 class="mb-3">Connect With Us</h6>
+          <div class="footer_social">
+            <a href="#" class="footer_icon text-white mr-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+            <a href="#" class="footer_icon text-white mr-3"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="#" class="footer_icon text-white"><i class="fab fa-twitter fa-lg"></i></a>
+          </div>
+          <p class="mt-3 mb-0">&copy; 2025 ADGH. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+{% include 'footer.html' %}

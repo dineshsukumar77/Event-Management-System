@@ -1,0 +1,241 @@
+{% include 'header.html' %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <div class="d-flex justify-content-between align-items-center">
+            <h3 class="card-title mb-0">
+              <i class="fas fa-calendar-check"></i> Booking Details
+            </h3>
+            <div>
+              <a href="{{ url_for('booking.edit_booking_form', booking_id=booking.id) }}" 
+                 class="btn btn-warning btn-sm">
+                <i class="fas fa-edit"></i> Edit
+              </a>
+              <a href="{{ url_for('booking.view_bookings') }}" class="btn btn-secondary btn-sm">
+                <i class="fas fa-arrow-left"></i> Back
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="text-primary">Event Information</h5>
+              <table class="table table-borderless">
+                <tr>
+                  <td><strong>Booking ID:</strong></td>
+                  <td>#{{ booking.id }}</td>
+                </tr>
+                <tr>
+                  <td><strong>Event Date:</strong></td>
+                  <td>{{ booking.event_date.strftime('%B %d, %Y') }}</td>
+                </tr>
+                <tr>
+                  <td><strong>Start Time:</strong></td>
+                  <td>{{ booking.start_at }}</td>
+                </tr>
+                <tr>
+                  <td><strong>Duration:</strong></td>
+                  <td>{{ booking.max_total_hour }} hours</td>
+                </tr>
+                <tr>
+                  <td><strong>Number of Guests:</strong></td>
+                  <td>{{ booking.no_of_guest }}</td>
+                </tr>
+                <tr>
+                  <td><strong>Total Amount:</strong></td>
+                  <td>₹{{ booking.amount }}</td>
+                </tr>
+                <tr>
+                  <td><strong>Booking Date:</strong></td>
+                  <td>{{ booking.current_date }}</td>
+                </tr>
+              </table>
+
+              <a href="{{ url_for('receipt.download_receipt', booking_id=booking.id) }}" class="btn btn-outline-secondary btn-sm mt-2">
+                <i class="fas fa-file-download"></i>
+                {% if booking.payment_status == 1 %}Download Receipt (PDF){% else %}Download Proforma Receipt (PDF){% endif %}
+              </a>
+            </div>
+            
+            <div class="col-md-6">
+              <h5 class="text-primary">Status Information</h5>
+              <table class="table table-borderless">
+                <tr>
+                  <td><strong>Booking Status:</strong></td>
+                  <td>
+                    {% if booking.accept_status == 0 %}
+                      <span class="badge badge-warning">Pending</span>
+                    {% elif booking.accept_status == 1 %}
+                      <span class="badge badge-success">Accepted</span>
+                    {% else %}
+                      <span class="badge badge-danger">Rejected</span>
+                    {% endif %}
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Payment Status:</strong></td>
+                  <td>
+                    {% if booking.payment_status == 0 %}
+                      <span class="badge badge-warning">Pending</span>
+                    {% elif booking.payment_status == 1 %}
+                      <span class="badge badge-success">Paid</span>
+                    {% else %}
+                      <span class="badge badge-danger">Failed</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              </table>
+              
+              {% if booking.event %}
+                <h6 class="text-info mt-3">Event Type</h6>
+                <p>{{ booking.event.eventname }}</p>
+                {% if booking.event.event_desc %}
+                  <p class="text-muted">{{ booking.event.event_desc }}</p>
+                {% endif %}
+              {% endif %}
+            </div>
+          </div>
+          
+          <hr>
+          
+          <!-- Services -->
+          <div class="row">
+            <div class="col-md-12">
+              <h5 class="text-primary">Selected Services</h5>
+              
+              <div class="row">
+                {% if booking.hotel %}
+                  <div class="col-md-6">
+                    <div class="card mb-3">
+                      <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-hotel"></i> Venue</h6>
+                      </div>
+                      <div class="card-body">
+                        <h6>{{ booking.hotel.hotel_name }}</h6>
+                        <p class="text-muted">{{ booking.hotel.hotel_desc }}</p>
+                        <p><strong>Location:</strong> {{ booking.hotel.location }}</p>
+                        <p><strong>Price:</strong> ₹{{ booking.hotel.price }}</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                
+                {% if booking.catering %}
+                  <div class="col-md-6">
+                    <div class="card mb-3">
+                      <div class="card-header">
+                        <h6 class="mb-0"><i class="fas fa-utensils"></i> Catering</h6>
+                      </div>
+                      <div class="card-body">
+                        <h6>{{ booking.catering.catername }}</h6>
+                        <p class="text-muted">{{ booking.catering.cater_desc }}</p>
+                        <p><strong>Location:</strong> {{ booking.catering.cater_location }}</p>
+                        <p><strong>Price:</strong> ₹{{ booking.catering.cater_price }}</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          
+          <!-- Additional Services -->
+          {% if booking.photographer_name_desc or booking.dj_name_desc or booking.makeupartist_name_desc or booking.decorator_name_desc %}
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <h5 class="text-primary">Additional Services</h5>
+                
+                <div class="row">
+                  {% if booking.photographer_name_desc %}
+                    <div class="col-md-6">
+                      <div class="card mb-3">
+                        <div class="card-header">
+                          <h6 class="mb-0"><i class="fas fa-camera"></i> Photographer</h6>
+                        </div>
+                        <div class="card-body">
+                          <p>{{ booking.photographer_name_desc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  
+                  {% if booking.dj_name_desc %}
+                    <div class="col-md-6">
+                      <div class="card mb-3">
+                        <div class="card-header">
+                          <h6 class="mb-0"><i class="fas fa-music"></i> DJ/Entertainment</h6>
+                        </div>
+                        <div class="card-body">
+                          <p>{{ booking.dj_name_desc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  
+                  {% if booking.makeupartist_name_desc %}
+                    <div class="col-md-6">
+                      <div class="card mb-3">
+                        <div class="card-header">
+                          <h6 class="mb-0"><i class="fas fa-palette"></i> Makeup Artist</h6>
+                        </div>
+                        <div class="card-body">
+                          <p>{{ booking.makeupartist_name_desc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  
+                  {% if booking.decorator_name_desc %}
+                    <div class="col-md-6">
+                      <div class="card mb-3">
+                        <div class="card-header">
+                          <h6 class="mb-0"><i class="fas fa-star"></i> Decorator</h6>
+                        </div>
+                        <div class="card-body">
+                          <p>{{ booking.decorator_name_desc }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+          
+          <!-- Action Buttons -->
+          <div class="row mt-4">
+            <div class="col-md-12 text-center">
+              <a href="{{ url_for('booking.booking_status', booking_id=booking.id) }}" 
+                 class="btn btn-info">
+                <i class="fas fa-info-circle"></i> View Status
+              </a>
+              <button type="button" class="btn btn-danger ml-2" 
+                      onclick="deleteBooking({{ booking.id }})">
+                <i class="fas fa-trash"></i> Delete Booking
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function deleteBooking(bookingId) {
+  if (confirm('Are you sure you want to delete this booking? This action cannot be undone.')) {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = `/delete-booking/${bookingId}`;
+    document.body.appendChild(form);
+    form.submit();
+  }
+}
+</script>
+
+{% include 'footer.html' %} 

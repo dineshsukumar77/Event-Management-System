@@ -1,0 +1,44 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Buffet Options</h2>
+  {% if is_admin %}
+    <a href="{{ url_for('catering.add_catering') }}" class="btn btn-primary mb-3">Add Buffet</a>
+  {% endif %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Image</th>
+        {% if is_admin %}<th>Actions</th>{% endif %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for c in catering %}
+      <tr>
+        <td>{{ c.catername }}</td>
+        <td>{{ c.cater_desc }}</td>
+        <td>{{ c.cater_location }}</td>
+        <td>{{ c.cater_price }}</td>
+        <td>
+          {% set img_path = c.cater_img if c.cater_img else 'images/Catering.png' %}
+          <img src="{{ url_for('static', filename=img_path) }}" style="max-width:120px; border-radius:6px;">
+        </td>
+        {% if is_admin %}
+        <td>
+          <a href="{{ url_for('catering.edit_catering', catering_id=c.id) }}" class="btn btn-sm btn-warning">Edit</a>
+          <form action="{{ url_for('catering.delete_catering', catering_id=c.id) }}" method="POST" style="display:inline;">
+            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this buffet?');">Delete</button>
+          </form>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+{% include 'footer.html' %}

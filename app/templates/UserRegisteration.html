@@ -1,0 +1,272 @@
+{% include 'header.html' %}
+
+<style>
+  .registration-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .registration-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+  }
+  
+  .glass-form {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+  }
+  
+  .form-control-modern {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+  }
+  
+  .form-control-modern:focus {
+    background: rgba(255, 255, 255, 1);
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+  }
+  
+  .btn-modern {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 15px;
+    padding: 15px 30px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+  }
+  
+  .btn-modern:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+  }
+  
+  .gradient-text {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+</style>
+
+<div class="registration-hero">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-5">
+        <div class="text-white">
+          <h1 class="display-4 font-weight-bold mb-4 floating">Create Your Account</h1>
+          <p class="lead mb-4">Join ADGH and start planning your dream events with our comprehensive event management platform.</p>
+          <div class="d-flex align-items-center mb-4">
+            <div class="mr-4">
+              <i class="fas fa-check-circle text-success fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="text-white mb-1">Premium Venues</h5>
+              <p class="text-white-50 mb-0">Access to exclusive locations</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-4">
+            <div class="mr-4">
+              <i class="fas fa-check-circle text-success fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="text-white mb-1">Expert Vendors</h5>
+              <p class="text-white-50 mb-0">Curated professional services</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="mr-4">
+              <i class="fas fa-check-circle text-success fa-2x"></i>
+            </div>
+            <div>
+              <h5 class="text-white mb-1">24/7 Support</h5>
+              <p class="text-white-50 mb-0">Always here to help you</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="glass-form">
+          <div class="text-center mb-4">
+            <h2 class="gradient-text mb-2">Join ADGH</h2>
+            <p class="text-white-50">Create your account in minutes</p>
+          </div>
+          
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          
+          <form action="{{ url_for('user.user_register') }}" method="POST">
+            <input type="hidden" name="role" value="User" />
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-transparent border-0">
+                      <i class="fa fa-user text-white"></i>
+                    </span>
+                  </div>
+                  <input type="text" name="first_name" class="form-control form-control-modern" placeholder="First Name" required>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-transparent border-0">
+                      <i class="fa fa-user text-white"></i>
+                    </span>
+                  </div>
+                  <input type="text" name="last_name" class="form-control form-control-modern" placeholder="Last Name" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-transparent border-0">
+                    <i class="fa fa-envelope text-white"></i>
+                  </span>
+                </div>
+                <input type="email" name="email" class="form-control form-control-modern" placeholder="Email Address" required>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-transparent border-0">
+                    <i class="fa fa-phone text-white"></i>
+                  </span>
+                </div>
+                <input type="tel" name="contactno" pattern="[6789][0-9]{9}" class="form-control form-control-modern" placeholder="Phone Number" required>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-transparent border-0">
+                    <i class="fas fa-map-marker-alt text-white"></i>
+                  </span>
+                </div>
+                <textarea name="address" class="form-control form-control-modern" placeholder="Address" rows="3"></textarea>
+              </div>
+            </div>
+            
+            <div class="mb-3">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-transparent border-0">
+                    <i class="fas fa-venus-mars text-white"></i>
+                  </span>
+                </div>
+                <select name="gender" class="form-control form-control-modern" required>
+                  <option value="">Choose your Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-transparent border-0">
+                      <i class="fa fa-lock text-white"></i>
+                    </span>
+                  </div>
+                  <input type="password" name="password" id="password" class="form-control form-control-modern" placeholder="Password" required>
+                </div>
+              </div>
+              
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-transparent border-0">
+                      <i class="fa fa-lock text-white"></i>
+                    </span>
+                  </div>
+                  <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-modern" placeholder="Confirm Password" required>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <button type="submit" class="btn btn-modern btn-block">
+                <i class="fas fa-user-plus mr-2"></i>
+                Create Account
+              </button>
+            </div>
+            
+            <div class="text-center">
+              <p class="text-white-50 mb-0">Already have an account? 
+                <a href="{{ url_for('user.user_login_page') }}" class="text-white font-weight-bold">Sign In</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var password = document.getElementById("password"), confirm_password = document.getElementById("confirm_password");
+
+function checkInputs(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = checkInputs;
+confirm_password.onkeyup = checkInputs;
+</script>
+
+{% include 'footer.html' %}

@@ -1,0 +1,33 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Edit Buffet</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="catername">Name</label>
+      <input type="text" class="form-control" id="catername" name="catername" value="{{ catering.catername }}" required>
+    </div>
+    <div class="form-group">
+      <label for="cater_desc">Description</label>
+      <textarea class="form-control" id="cater_desc" name="cater_desc" required>{{ catering.cater_desc }}</textarea>
+    </div>
+    <div class="form-group">
+      <label for="cater_location">Location</label>
+      <input type="text" class="form-control" id="cater_location" name="cater_location" value="{{ catering.cater_location }}" required>
+    </div>
+    <div class="form-group">
+      <label for="cater_price">Price</label>
+      <input type="number" class="form-control" id="cater_price" name="cater_price" value="{{ catering.cater_price }}" required>
+    </div>
+    <div class="form-group">
+      <label for="cater_img">Image</label>
+      {% if catering.cater_img %}
+        <img src="{{ url_for('static', filename=catering.cater_img) }}" alt="Buffet Image" style="max-width:150px;display:block;">
+      {% endif %}
+      <input type="file" class="form-control" id="cater_img" name="cater_img">
+    </div>
+    <button type="submit" class="btn btn-success">Update Buffet</button>
+    <a href="{{ url_for('catering.list_catering') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

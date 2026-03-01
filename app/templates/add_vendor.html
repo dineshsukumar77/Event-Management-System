@@ -1,0 +1,30 @@
+{% extends 'header.html' %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Add Vendor</h2>
+  <form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="vendorname">Name</label>
+      <input type="text" class="form-control" id="vendorname" name="vendorname" required>
+    </div>
+    <div class="form-group">
+      <label for="vendor_desc">Description</label>
+      <textarea class="form-control" id="vendor_desc" name="vendor_desc" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="vendor_location">Location</label>
+      <input type="text" class="form-control" id="vendor_location" name="vendor_location" required>
+    </div>
+    <div class="form-group">
+      <label for="vendor_price">Price</label>
+      <input type="number" class="form-control" id="vendor_price" name="vendor_price" required>
+    </div>
+    <div class="form-group">
+      <label for="vendor_img">Image</label>
+      <input type="file" class="form-control" id="vendor_img" name="vendor_img">
+    </div>
+    <button type="submit" class="btn btn-success">Add Vendor</button>
+    <a href="{{ url_for('vendor.list_vendors') }}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}
