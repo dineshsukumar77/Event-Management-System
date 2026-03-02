@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "68d53c8b496eab66dccebead",
+    "email": "test@example.com",
+    "first_name": "Test",
+    "last_name": "User",
+    "password": "test123",
+    "confirm_password": "test123",
+    "contactno": "9999999999",
+    "role": "User",
+    "gender": "Other",
+    "address": "Demo Street"
+  },
+  {
+    "_id": "68d53e26446b4a4f12417853",
+    "email": "dineshvydvas7900@gmail.com",
+    "first_name": "Dinesh",
+    "last_name": "G",
+    "password": "123",
+    "confirm_password": "123",
+    "contactno": "9036397900",
+    "role": "User",
+    "gender": "male",
+    "address": ""
+  },
+  {
+    "_id": "68d53eea8a76331e9fcebea4",
+    "email": "admin@example.com",
+    "first_name": "Admin",
+    "last_name": "User",
+    "password": "admin123",
+    "confirm_password": "admin123",
+    "contactno": "0000000000",
+    "role": "Admin",
+    "gender": "Other",
+    "address": "Admin Address"
+  },
+  {
+    "_id": "68d53fc2fcbed3c7e36bd073",
+    "email": "dini123@gmail.com",
+    "first_name": "dini",
+    "last_name": "g",
+    "password": "123",
+    "confirm_password": "123",
+    "contactno": "9036397900",
+    "role": "User",
+    "gender": "male",
+    "address": ""
+  }
+]

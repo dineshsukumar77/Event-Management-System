@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "68d53c8b496eab66dccebea4",
+    "eventname": "Wedding",
+    "event_desc": "Beautiful wedding ceremonies"
+  },
+  {
+    "_id": "68d53c8b496eab66dccebea5",
+    "eventname": "Birthday Party",
+    "event_desc": "Fun and memorable birthdays"
+  },
+  {
+    "_id": "68d53c8b496eab66dccebea6",
+    "eventname": "Corporate Event",
+    "event_desc": "Professional meetings and conferences"
+  }
+]

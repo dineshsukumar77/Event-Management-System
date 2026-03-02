@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "68d53c8b496eab66dccebea9",
+    "catername": "Elite Catering Services",
+    "cater_desc": "Premium gourmet menus",
+    "cater_location": "Downtown",
+    "cater_price": 2500
+  },
+  {
+    "_id": "68d53c8b496eab66dccebeaa",
+    "catername": "Fresh & Delicious",
+    "cater_desc": "Locally-sourced menus",
+    "cater_location": "Midtown",
+    "cater_price": 1800
+  }
+]

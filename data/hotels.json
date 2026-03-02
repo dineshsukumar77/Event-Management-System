@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "68d53c8b496eab66dccebea7",
+    "hotel_name": "Grand Plaza Hotel",
+    "hotel_desc": "Luxury hotel with ballrooms",
+    "price": 5000,
+    "location": "Downtown"
+  },
+  {
+    "_id": "68d53c8b496eab66dccebea8",
+    "hotel_name": "Riverside Resort",
+    "hotel_desc": "Resort with river views",
+    "price": 3500,
+    "location": "Riverside Drive"
+  }
+]
